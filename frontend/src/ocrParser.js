@@ -7,7 +7,13 @@ export async function runOCR(file, onProgress) {
 
   let response;
   try {
-    response = await fetch(OCR_API_URL, { method: "POST", body: formData });
+    response = await fetch(OCR_API_URL, {
+      method: "POST",
+      headers: {
+        "ngrok-skip-browser-warning": "true"
+      },
+      body: formData
+    });
   } catch {
     throw new Error("Could not reach the OCR backend. Start it with: uvicorn main:app --reload --port 8000");
   }
